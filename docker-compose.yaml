@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  nn-app-application:
+    build:
+      context: .
+    container_name: nn-app-application
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
+    ports:
+      - "9001:9001"
+    networks:
+      - nn-network
+
+networks:
+  nn-network:
+    driver: bridge
