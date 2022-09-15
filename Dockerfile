@@ -17,7 +17,7 @@ WORKDIR /tmp
 COPY --chown=gradle:gradle . .
 
 ENV SPRING_PROFILES_ACTIVE="docker"
-RUN gradle --no-daemon bootJar
+RUN gradle --no-daemon bootJar -DskipTests
 
 # ENTRY PHASE
 FROM openjdk:17.0.1 
