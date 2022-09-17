@@ -17,56 +17,50 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.helpers;
+package nl.nn.utils.helper;
 
 import java.util.UUID;
 
-import nl.nn.app.recipe.view.RecipeVO;
-import nl.nn.app.tender.enums.TenderType;
+import nl.nn.app.player.view.PlayerVO;
 
-public final class RecipeBuilderHelper {
+public final class PlayerBuilderHelper {
     public static final UUID DEFAULT_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public static final UUID OTHER_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
-    public static final TenderType DEFAULT_TENDER = TenderType.CREDIT_CARD;
+    public static final String DEFAULT_NAME = "PlayerVO One";
 
-    public static final TenderType OTHER_TENDER = TenderType.PAYPAL;
+    public static final String OTHER_NAME = "PlayerVO Two";
 
-    private final RecipeVO recipe;
+    public static final String DEFAULT_EMAIL = "player.one@nn.nl";
+
+    public static final String OTHER_EMAIL = "player.two@nn.nl";
+
+    private final PlayerVO player;
 
     /**
-     * Initialize the {@link RecipeVO} with default values
+     * Initialize the {@link PlayerVO} with default values
      */
-    private RecipeBuilderHelper() {
-        recipe = RecipeVO.builder()
+    private PlayerBuilderHelper() {
+        player = PlayerVO.builder()
                 .id(DEFAULT_ID)
-                .tender(DEFAULT_TENDER)
+                .name(DEFAULT_NAME)
+                .email(DEFAULT_EMAIL)
                 .build();
     }
 
     /**
      * Builder initialize
-     * @return the {@link RecipeBuilderHelper} instance
+     * @return the {@link PlayerBuilderHelper} instance
      */
-    public static RecipeBuilderHelper builder() {
-        return new RecipeBuilderHelper();
+    public static PlayerBuilderHelper builder() {
+        return new PlayerBuilderHelper();
     }
 
     /**
-     * Set a new {@link TenderType}
-     * @param tender the tender
-     * @return self {@link RecipeBuilderHelper} instance
+     * @return the instance of {@link PlayerVO}
      */
-    public RecipeBuilderHelper tender(final TenderType tender) {
-        recipe.setTender(tender);
-        return this;
-    }
-
-    /**
-     * @return the instance of {@link RecipeVO}
-     */
-    public RecipeVO build() {
-        return recipe;
+    public PlayerVO build() {
+        return player;
     }
 }

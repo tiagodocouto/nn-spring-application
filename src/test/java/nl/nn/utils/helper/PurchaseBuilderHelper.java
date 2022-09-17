@@ -17,12 +17,11 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.helpers;
+package nl.nn.utils.helper;
 
-import static nl.nn.helpers.RecipeBuilderHelper.OTHER_TENDER;
+import static nl.nn.utils.helper.RecipeBuilderHelper.OTHER_TENDER;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 import nl.nn.app.purchase.view.PurchaseItemVO;
@@ -67,26 +66,6 @@ public final class PurchaseBuilderHelper {
      */
     public static PurchaseBuilderHelper builder() {
         return new PurchaseBuilderHelper();
-    }
-
-    /**
-     * Change the {@link PurchaseItemVO} elements
-     * @param items all items
-     * @return self {@link PurchaseBuilderHelper} instance
-     */
-    public PurchaseBuilderHelper items(final PurchaseItemVO... items) {
-        purchase.setPurchaseItems(new ArrayList<>(Arrays.stream(items).toList()));
-        return this;
-    }
-
-    /**
-     * Set a new {@link RecipeVO}
-     * @param recipe the recipe
-     * @return self {@link PurchaseBuilderHelper} instance
-     */
-    public PurchaseBuilderHelper recipe(final RecipeVO recipe) {
-        purchase.setRecipe(recipe);
-        return this;
     }
 
     /**

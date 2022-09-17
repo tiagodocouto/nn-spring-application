@@ -22,7 +22,11 @@ package nl.nn.app.purchase.view;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -35,10 +39,14 @@ import nl.nn.app.recipe.view.RecipeVO;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class PurchaseVO extends ViewObject {
+    @NotNull
+    @NotEmpty
     private List<PurchaseItemVO> purchaseItems;
 
+    @NotNull
     private RecipeVO recipe;
 
     /**

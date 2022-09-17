@@ -17,7 +17,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.helpers;
+package nl.nn.utils.helper;
 
 import java.util.UUID;
 

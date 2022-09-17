@@ -21,7 +21,10 @@ package nl.nn.app.recipe.view;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -34,8 +37,10 @@ import nl.nn.app.tender.enums.TenderType;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class RecipeVO extends ViewObject {
+    @NotNull
     private TenderType tender;
 
     /**

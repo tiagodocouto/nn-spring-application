@@ -22,7 +22,11 @@ package nl.nn.app.purchase.view;
 import java.util.Objects;
 import java.util.UUID;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -34,14 +38,22 @@ import nl.nn.app.core.view.ViewObject;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class PurchaseItemVO extends ViewObject {
+    @NotNull
     private UUID itemId;
 
+    @Min(0)
+    @NotNull
     private Double amount;
 
+    @Min(0)
+    @NotNull
     private Double discount;
 
+    @Min(0)
+    @NotNull
     private Double purchaseValue;
 
     /**

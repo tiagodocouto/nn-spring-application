@@ -19,18 +19,18 @@
 
 package nl.nn.app.purchase.view;
 
-import static nl.nn.helpers.PurchaseBuilderHelper.DEFAULT_ID;
-import static nl.nn.helpers.PurchaseBuilderHelper.DEFAULT_PURCHASE_ITEM;
-import static nl.nn.helpers.PurchaseBuilderHelper.DEFAULT_RECIPE;
-import static nl.nn.helpers.PurchaseBuilderHelper.OTHER_ID;
-import static nl.nn.helpers.PurchaseBuilderHelper.OTHER_PURCHASE_ITEM;
-import static nl.nn.helpers.PurchaseBuilderHelper.OTHER_RECIPE;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.DEFAULT_ID;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.DEFAULT_PURCHASE_ITEM;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.DEFAULT_RECIPE;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.OTHER_ID;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.OTHER_PURCHASE_ITEM;
+import static nl.nn.utils.helper.PurchaseBuilderHelper.OTHER_RECIPE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import nl.nn.helpers.PlayerBuilderHelper;
-import nl.nn.helpers.PurchaseBuilderHelper;
+import nl.nn.utils.helper.PlayerBuilderHelper;
+import nl.nn.utils.helper.PurchaseBuilderHelper;
 import org.junit.jupiter.api.Test;
 
 class PurchaseVOTest {

@@ -19,18 +19,18 @@
 
 package nl.nn.app.purchase.view;
 
-import static nl.nn.helpers.PurchaseItemBuilderHelper.DEFAULT_AMOUNT;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.DEFAULT_DISCOUNT;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.DEFAULT_ID;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.DEFAULT_PURCHASE_VALUE;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.OTHER_AMOUNT;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.OTHER_DISCOUNT;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.OTHER_ID;
-import static nl.nn.helpers.PurchaseItemBuilderHelper.OTHER_PURCHASE_VALUE;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.DEFAULT_AMOUNT;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.DEFAULT_DISCOUNT;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.DEFAULT_ID;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.DEFAULT_PURCHASE_VALUE;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.OTHER_AMOUNT;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.OTHER_DISCOUNT;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.OTHER_ID;
+import static nl.nn.utils.helper.PurchaseItemBuilderHelper.OTHER_PURCHASE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.helpers.PlayerBuilderHelper;
-import nl.nn.helpers.PurchaseItemBuilderHelper;
+import nl.nn.utils.helper.PlayerBuilderHelper;
+import nl.nn.utils.helper.PurchaseItemBuilderHelper;
 import org.junit.jupiter.api.Test;
 
 class PurchaseVOItemTest {

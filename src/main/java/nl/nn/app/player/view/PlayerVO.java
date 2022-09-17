@@ -21,7 +21,11 @@ package nl.nn.app.player.view;
 
 import java.util.Objects;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -33,10 +37,14 @@ import nl.nn.app.core.view.ViewObject;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class PlayerVO extends ViewObject {
+    @NotBlank
     private String name;
 
+    @NotBlank
+    @Email
     private String email;
 
     /**
