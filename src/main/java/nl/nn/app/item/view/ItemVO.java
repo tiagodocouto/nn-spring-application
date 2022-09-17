@@ -21,7 +21,12 @@ package nl.nn.app.item.view;
 
 import java.util.Objects;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -34,16 +39,24 @@ import nl.nn.app.item.enums.ItemType;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class ItemVO extends ViewObject {
+    @NotNull
     private ItemType type;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String sku;
 
+    @Min(0)
+    @NotNull
     private Double discount;
 
+    @Min(0)
+    @NotNull
     private Double value;
 
     /**

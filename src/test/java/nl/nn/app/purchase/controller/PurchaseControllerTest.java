@@ -17,35 +17,35 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.app.purchase.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-import nl.nn.app.player.view.PlayerVO;
+import nl.nn.app.purchase.view.PurchaseVO;
 import nl.nn.utils.controller.ControllerTest;
-import nl.nn.utils.helper.PlayerBuilderHelper;
+import nl.nn.utils.helper.PurchaseBuilderHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
 
-@WebMvcTest(controllers = {PlayerController.class})
-class PlayerControllerTest extends ControllerTest<PlayerVO> {
-    private final static String BASE_URL = "/api/player";
+@WebMvcTest(controllers = {PurchaseController.class})
+class PurchaseControllerTest extends ControllerTest<PurchaseVO> {
+    private final static String BASE_URL = "/api/purchase";
 
     @Test
-    void testGivenAPlayerWhenPostingToControllerExpectToBeAccepted() throws Exception {
-        final var player = PlayerBuilderHelper.builder().build();
-        final var response = post(BASE_URL, player);
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.ACCEPTED.value());
-        assertThat(response.getContentAsString()).isEqualTo(parse(player));
+    void testGivenAPurchaseWhenPostingToControllerExpectToBeAccepted() throws Exception {
+        final var purchase = PurchaseBuilderHelper.builder().build();
+        final var response = post(BASE_URL, purchase);
+        assertThat(response.getStatus()).isEqualTo(ACCEPTED.value());
+        assertThat(response.getContentAsString()).isEqualTo(parse(purchase));
     }
 
     @Test
     void testGivenAnInvalidDataWhenPostingToControllerExpectToNotBeAccepted() throws Exception {
-        final var player = PlayerBuilderHelper.builder().build();
-        player.setName(null);
-        final var response = post(BASE_URL, player);
+        final var purchase = PurchaseBuilderHelper.builder().build();
+        purchase.setPurchaseItems(null);
+        final var response = post(BASE_URL, purchase);
         assertThat(response.getStatus()).isEqualTo(BAD_REQUEST.value());
     }
 }

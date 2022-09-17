@@ -17,12 +17,12 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.app.item.controller;
 
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
-import nl.nn.app.player.view.PlayerVO;
+import nl.nn.app.item.view.ItemVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/player")
+@RequestMapping("/api/item")
 @RequiredArgsConstructor
-public class PlayerController {
+public class ItemController {
     @PostMapping
-    public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
+    public ResponseEntity<ItemVO> postData(@Valid @RequestBody ItemVO data) {
         return ResponseEntity.accepted().body(data);
     }
 }
