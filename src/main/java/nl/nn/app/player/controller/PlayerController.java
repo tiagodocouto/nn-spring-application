@@ -17,43 +17,24 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.core.view;
+package nl.nn.app.player.controller;
 
-import java.io.Serializable;
-import java.util.Objects;
-import java.util.UUID;
+import javax.validation.Valid;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.RequiredArgsConstructor;
+import nl.nn.app.player.view.PlayerVO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Getter
-@Setter
-@SuperBuilder
-@ToString
-@NoArgsConstructor
-public abstract class ViewObject implements Serializable {
-    private UUID id;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (Objects.isNull(o))
-            return false;
-        if (!(o instanceof ViewObject that))
-            return false;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+@RestController
+@RequestMapping("/api/player")
+@RequiredArgsConstructor
+public class PlayerController {
+    @PostMapping
+    public ResponseEntity<PlayerVO> player(@Valid @RequestBody PlayerVO player) {
+        return ResponseEntity.accepted().body(player);
     }
 }

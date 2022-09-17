@@ -19,22 +19,22 @@
 
 package nl.nn.app.item.view;
 
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_DISCOUNT;
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_ID;
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_NAME;
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_SKU;
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_TYPE;
-import static nl.nn.helpers.ItemBuilderHelper.DEFAULT_VALUE;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_DISCOUNT;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_ID;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_NAME;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_SKU;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_TYPE;
-import static nl.nn.helpers.ItemBuilderHelper.OTHER_VALUE;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_DISCOUNT;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_ID;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_NAME;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_SKU;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_TYPE;
+import static nl.nn.utils.helper.ItemBuilderHelper.DEFAULT_VALUE;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_DISCOUNT;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_ID;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_NAME;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_SKU;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_TYPE;
+import static nl.nn.utils.helper.ItemBuilderHelper.OTHER_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.helpers.ItemBuilderHelper;
-import nl.nn.helpers.PlayerBuilderHelper;
+import nl.nn.utils.helper.ItemBuilderHelper;
+import nl.nn.utils.helper.PlayerBuilderHelper;
 import org.junit.jupiter.api.Test;
 
 class ItemVOTest {

@@ -17,43 +17,24 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.core.view;
+package nl.nn.app.player.controller;
 
-import java.io.Serializable;
-import java.util.Objects;
-import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import nl.nn.app.player.view.PlayerVO;
+import nl.nn.utils.controller.ControllerTest;
+import nl.nn.utils.helper.PlayerBuilderHelper;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpStatus;
 
-@Getter
-@Setter
-@SuperBuilder
-@ToString
-@NoArgsConstructor
-public abstract class ViewObject implements Serializable {
-    private UUID id;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (Objects.isNull(o))
-            return false;
-        if (!(o instanceof ViewObject that))
-            return false;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+@WebMvcTest(controllers = {PlayerController.class})
+class PlayerControllerTest extends ControllerTest<PlayerVO> {
+    @Test
+    void testGivenAPlayerExpectToBeEqualsOtherPlayerWithSameValues() throws Exception {
+        final var player = PlayerBuilderHelper.builder().build();
+        final var response = post("/api/player", player);
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.ACCEPTED.value());
+        assertThat(response.getContentAsString()).isEqualTo(parse(player));
     }
 }

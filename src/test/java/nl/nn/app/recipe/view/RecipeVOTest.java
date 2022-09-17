@@ -19,14 +19,14 @@
 
 package nl.nn.app.recipe.view;
 
-import static nl.nn.helpers.RecipeBuilderHelper.DEFAULT_ID;
-import static nl.nn.helpers.RecipeBuilderHelper.DEFAULT_TENDER;
-import static nl.nn.helpers.RecipeBuilderHelper.OTHER_ID;
-import static nl.nn.helpers.RecipeBuilderHelper.OTHER_TENDER;
+import static nl.nn.utils.helper.RecipeBuilderHelper.DEFAULT_ID;
+import static nl.nn.utils.helper.RecipeBuilderHelper.DEFAULT_TENDER;
+import static nl.nn.utils.helper.RecipeBuilderHelper.OTHER_ID;
+import static nl.nn.utils.helper.RecipeBuilderHelper.OTHER_TENDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.helpers.PlayerBuilderHelper;
-import nl.nn.helpers.RecipeBuilderHelper;
+import nl.nn.utils.helper.PlayerBuilderHelper;
+import nl.nn.utils.helper.RecipeBuilderHelper;
 import org.junit.jupiter.api.Test;
 
 class RecipeVOTest {

@@ -27,6 +27,7 @@ dependencies {
     // SPRING BOOT
     implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
     implementation "org.springframework.kafka:spring-kafka:$kafkaVersion"
     developmentOnly "org.springframework.boot:spring-boot-devtools:$springBootVersion"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:$springBootVersion"

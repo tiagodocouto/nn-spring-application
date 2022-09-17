@@ -19,16 +19,16 @@
 
 package nl.nn.app.player.view;
 
-import static nl.nn.helpers.PlayerBuilderHelper.DEFAULT_EMAIL;
-import static nl.nn.helpers.PlayerBuilderHelper.DEFAULT_ID;
-import static nl.nn.helpers.PlayerBuilderHelper.DEFAULT_NAME;
-import static nl.nn.helpers.PlayerBuilderHelper.OTHER_EMAIL;
-import static nl.nn.helpers.PlayerBuilderHelper.OTHER_ID;
-import static nl.nn.helpers.PlayerBuilderHelper.OTHER_NAME;
+import static nl.nn.utils.helper.PlayerBuilderHelper.DEFAULT_EMAIL;
+import static nl.nn.utils.helper.PlayerBuilderHelper.DEFAULT_ID;
+import static nl.nn.utils.helper.PlayerBuilderHelper.DEFAULT_NAME;
+import static nl.nn.utils.helper.PlayerBuilderHelper.OTHER_EMAIL;
+import static nl.nn.utils.helper.PlayerBuilderHelper.OTHER_ID;
+import static nl.nn.utils.helper.PlayerBuilderHelper.OTHER_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.helpers.ItemBuilderHelper;
-import nl.nn.helpers.PlayerBuilderHelper;
+import nl.nn.utils.helper.ItemBuilderHelper;
+import nl.nn.utils.helper.PlayerBuilderHelper;
 import org.junit.jupiter.api.Test;
 
 class PlayerVOTest {

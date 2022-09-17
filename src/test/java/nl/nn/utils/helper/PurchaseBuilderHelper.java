@@ -17,9 +17,9 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.helpers;
+package nl.nn.utils.helper;
 
-import static nl.nn.helpers.RecipeBuilderHelper.OTHER_TENDER;
+import static nl.nn.utils.helper.RecipeBuilderHelper.OTHER_TENDER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
