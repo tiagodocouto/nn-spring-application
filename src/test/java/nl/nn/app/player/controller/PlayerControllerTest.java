@@ -33,6 +33,11 @@ import org.springframework.http.HttpStatus;
 class PlayerControllerTest extends ControllerTest<PlayerVO> {
     private final static String BASE_URL = "/api/player";
 
+    /**
+     * Test creating a new {@link PlayerVO}
+     * and posting it through {@link PlayerController}
+     * expect to be accepted. 
+     */
     @Test
     void testGivenAPlayerWhenPostingToControllerExpectToBeAccepted() throws Exception {
         final var player = PlayerBuilderHelper.builder().build();
@@ -41,6 +46,11 @@ class PlayerControllerTest extends ControllerTest<PlayerVO> {
         assertThat(response.getContentAsString()).isEqualTo(parse(player));
     }
 
+    /**
+     * Test creating an invalid {@link PlayerVO}
+     * and posting it through {@link PlayerController}
+     * expect to receive bad request. 
+     */
     @Test
     void testGivenAnInvalidDataWhenPostingToControllerExpectToNotBeAccepted() throws Exception {
         final var player = PlayerBuilderHelper.builder().build();

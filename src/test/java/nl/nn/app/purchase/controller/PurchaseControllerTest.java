@@ -33,6 +33,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 class PurchaseControllerTest extends ControllerTest<PurchaseVO> {
     private final static String BASE_URL = "/api/purchase";
 
+    /**
+     * Test creating a new {@link PurchaseVO}
+     * and posting it through {@link PurchaseController}
+     * expect to be accepted. 
+     */
     @Test
     void testGivenAPurchaseWhenPostingToControllerExpectToBeAccepted() throws Exception {
         final var purchase = PurchaseBuilderHelper.builder().build();
@@ -41,6 +46,11 @@ class PurchaseControllerTest extends ControllerTest<PurchaseVO> {
         assertThat(response.getContentAsString()).isEqualTo(parse(purchase));
     }
 
+    /**
+     * Test creating an invalid {@link PurchaseVO}
+     * and posting it through {@link PurchaseController}
+     * expect to receive bad request. 
+     */
     @Test
     void testGivenAnInvalidDataWhenPostingToControllerExpectToNotBeAccepted() throws Exception {
         final var purchase = PurchaseBuilderHelper.builder().build();

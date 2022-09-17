@@ -33,6 +33,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 class ItemControllerTest extends ControllerTest<ItemVO> {
     private final static String BASE_URL = "/api/item";
 
+    /**
+     * Test creating a new {@link ItemVO}
+     * and posting it through {@link ItemController}
+     * expect to be accepted. 
+     */
     @Test
     void testGivenAnItemWhenPostingToControllerExpectToBeAccepted() throws Exception {
         final var item = ItemBuilderHelper.builder().build();
@@ -41,6 +46,11 @@ class ItemControllerTest extends ControllerTest<ItemVO> {
         assertThat(response.getContentAsString()).isEqualTo(parse(item));
     }
 
+    /**
+     * Test creating an invalid {@link ItemVO}
+     * and posting it through {@link ItemController}
+     * expect to receive bad request. 
+     */
     @Test
     void testGivenAnInvalidDataWhenPostingToControllerExpectToNotBeAccepted() throws Exception {
         final var item = ItemBuilderHelper.builder().build();
