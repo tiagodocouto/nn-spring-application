@@ -17,14 +17,15 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app;
+package nl.nn.app.item.enums;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class NNSpringAppTests {
-    @Test
-    void contextLoads() {
-    }
+/**
+ * Tender Types enumeration
+ */
+public enum ItemType {
+    ARMOR,
+    BOOK,
+    RING,
+    SPELL,
+    POTION
 }
