@@ -17,19 +17,18 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.app.player.stream;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static nl.nn.app.player.stream.PlayerStreamProducer.TOPIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.app.player.stream.PlayerStreamProducer;
 import nl.nn.app.player.view.PlayerVO;
 import nl.nn.utils.config.TestBeanConfiguration;
 import nl.nn.utils.helper.PlayerBuilderHelper;
 import nl.nn.utils.stream.PlayerStreamConsumer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
@@ -39,7 +38,10 @@ import org.springframework.test.context.ContextConfiguration;
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
 @ContextConfiguration(classes = {TestBeanConfiguration.class})
-class PlayerStreamTest {
+class PlayerStreamProducerTest {
+    @Value("${spring.kafka.properties.topic.player}")
+    private String topic;
+
     @Autowired
     private PlayerStreamProducer playerStreamProducer;
 
@@ -55,7 +57,7 @@ class PlayerStreamTest {
     void testGivenAnItemWhenPostingToControllerExpectToBeAccepted() throws Exception {
         final var player = PlayerBuilderHelper.builder().build();
         final var result = playerStreamProducer.send(player).get().getProducerRecord();
-        assertThat(result.topic()).isEqualTo(TOPIC);
+        assertThat(result.topic()).isEqualTo(topic);
         assertThat(result.key()).isEqualTo(player.getId());
         assertThat(result.value()).isEqualTo(player);
 
