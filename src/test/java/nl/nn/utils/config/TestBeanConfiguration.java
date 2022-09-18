@@ -17,28 +17,28 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.utils.config;
 
-import javax.validation.Valid;
+import nl.nn.utils.stream.ItemStreamConsumer;
+import nl.nn.utils.stream.PlayerStreamConsumer;
+import nl.nn.utils.stream.PurchaseStreamConsumer;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 
-import lombok.RequiredArgsConstructor;
-import nl.nn.app.player.stream.PlayerStreamProducer;
-import nl.nn.app.player.view.PlayerVO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+@TestConfiguration
+public class TestBeanConfiguration {
+    @Bean
+    public ItemStreamConsumer itemStreamConsumer() {
+        return new ItemStreamConsumer();
+    }
 
-@RestController
-@RequestMapping("/api/player")
-@RequiredArgsConstructor
-public class PlayerController {
-    private final PlayerStreamProducer playerStreamProducer;
+    @Bean
+    public PlayerStreamConsumer playerStreamConsumer() {
+        return new PlayerStreamConsumer();
+    }
 
-    @PostMapping
-    public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
-        playerStreamProducer.send(data);
-        return ResponseEntity.accepted().body(data);
+    @Bean
+    public PurchaseStreamConsumer purchaseStreamConsumer() {
+        return new PurchaseStreamConsumer();
     }
 }

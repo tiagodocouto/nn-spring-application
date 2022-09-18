@@ -17,28 +17,46 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.utils.stream;
 
-import javax.validation.Valid;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 
-import lombok.RequiredArgsConstructor;
-import nl.nn.app.player.stream.PlayerStreamProducer;
-import nl.nn.app.player.view.PlayerVO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.kafka.annotation.KafkaListener;
 
-@RestController
-@RequestMapping("/api/player")
-@RequiredArgsConstructor
-public class PlayerController {
-    private final PlayerStreamProducer playerStreamProducer;
+public abstract class StreamConsumer<T> {
+    private final CountDownLatch latch = new CountDownLatch(1);
 
-    @PostMapping
-    public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
-        playerStreamProducer.send(data);
-        return ResponseEntity.accepted().body(data);
+    private ConsumerRecord<UUID, T> record;
+
+    /**
+     * Process the received record from Kafka
+     * @param record the record data
+     */
+    public void received(ConsumerRecord<UUID, T> record) {
+        this.record = record;
+        latch().countDown();
+    }
+
+    /**
+     * Define the Topic to listen to
+     * @see KafkaListener
+     * @param record the record data
+     */
+    public abstract void receive(ConsumerRecord<UUID, T> record);
+
+    /**
+     * @return the latch
+     */
+    public CountDownLatch latch() {
+        return latch;
+    }
+
+    /**
+     * @return the record
+     */
+    public ConsumerRecord<UUID, T> record() {
+        return record;
     }
 }

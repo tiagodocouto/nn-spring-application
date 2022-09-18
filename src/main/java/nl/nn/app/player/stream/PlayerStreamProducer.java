@@ -17,28 +17,30 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.app.player.stream;
 
-import javax.validation.Valid;
+import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
-import nl.nn.app.player.stream.PlayerStreamProducer;
+import lombok.extern.slf4j.Slf4j;
 import nl.nn.app.player.view.PlayerVO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
 
-@RestController
-@RequestMapping("/api/player")
+@Component
+@Slf4j
 @RequiredArgsConstructor
-public class PlayerController {
-    private final PlayerStreamProducer playerStreamProducer;
+public class PlayerStreamProducer {
+    @Value("${spring.kafka.properties.topic.player}")
+    public String topic;
 
-    @PostMapping
-    public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
-        playerStreamProducer.send(data);
-        return ResponseEntity.accepted().body(data);
+    private final KafkaTemplate<UUID, PlayerVO> kafka;
+
+    public ListenableFuture<SendResult<UUID, PlayerVO>> send(final PlayerVO data) {
+        log.debug("produce: topic='{}' key='{}' data='{}'", topic, data.getId(), data);
+        return kafka.send(topic, data.getId(), data);
     }
 }

@@ -17,28 +17,23 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.player.controller;
+package nl.nn.utils.stream;
 
-import javax.validation.Valid;
+import java.util.UUID;
 
-import lombok.RequiredArgsConstructor;
-import nl.nn.app.player.stream.PlayerStreamProducer;
-import nl.nn.app.player.view.PlayerVO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import nl.nn.app.item.view.ItemVO;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.boot.test.context.TestComponent;
+import org.springframework.kafka.annotation.KafkaListener;
 
-@RestController
-@RequestMapping("/api/player")
-@RequiredArgsConstructor
-public class PlayerController {
-    private final PlayerStreamProducer playerStreamProducer;
-
-    @PostMapping
-    public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
-        playerStreamProducer.send(data);
-        return ResponseEntity.accepted().body(data);
+@TestComponent
+public class ItemStreamConsumer extends StreamConsumer<ItemVO> {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @KafkaListener(topics = {"${spring.kafka.properties.topic.item}"})
+    public void receive(ConsumerRecord<UUID, ItemVO> record) {
+        received(record);
     }
 }
