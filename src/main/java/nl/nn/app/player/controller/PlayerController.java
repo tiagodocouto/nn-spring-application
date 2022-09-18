@@ -22,6 +22,7 @@ package nl.nn.app.player.controller;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import nl.nn.app.player.stream.PlayerStreamProducer;
 import nl.nn.app.player.view.PlayerVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +34,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/player")
 @RequiredArgsConstructor
 public class PlayerController {
+    private final PlayerStreamProducer playerStreamProducer;
+
     @PostMapping
     public ResponseEntity<PlayerVO> postData(@Valid @RequestBody PlayerVO data) {
+        playerStreamProducer.send(data);
         return ResponseEntity.accepted().body(data);
     }
 }

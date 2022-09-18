@@ -24,6 +24,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.nn.app.purchase.view.PurchaseVO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -33,12 +34,13 @@ import org.springframework.util.concurrent.ListenableFuture;
 @Slf4j
 @RequiredArgsConstructor
 public class PurchaseStreamProducer {
-    public static final String TOPIC = "nn-purchase";
+    @Value("${spring.kafka.properties.topic.purchase}")
+    public String topic;
 
     private final KafkaTemplate<UUID, PurchaseVO> kafka;
 
     public ListenableFuture<SendResult<UUID, PurchaseVO>> send(final PurchaseVO data) {
-        log.debug("produce: topic='{}' key='{}' data='{}'", TOPIC, data.getId(), data);
-        return kafka.send(TOPIC, data.getId(), data);
+        log.debug("produce: topic='{}' key='{}' data='{}'", topic, data.getId(), data);
+        return kafka.send(topic, data.getId(), data);
     }
 }

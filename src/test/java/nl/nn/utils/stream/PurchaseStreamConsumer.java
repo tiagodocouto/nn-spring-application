@@ -21,7 +21,6 @@ package nl.nn.utils.stream;
 
 import java.util.UUID;
 
-import nl.nn.app.purchase.stream.PurchaseStreamProducer;
 import nl.nn.app.purchase.view.PurchaseVO;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.test.context.TestComponent;
@@ -33,7 +32,7 @@ public class PurchaseStreamConsumer extends StreamConsumer<PurchaseVO> {
      * {@inheritDoc}
      */
     @Override
-    @KafkaListener(topics = {PurchaseStreamProducer.TOPIC})
+    @KafkaListener(topics = {"${spring.kafka.properties.topic.purchase}"})
     public void receive(ConsumerRecord<UUID, PurchaseVO> record) {
         received(record);
     }

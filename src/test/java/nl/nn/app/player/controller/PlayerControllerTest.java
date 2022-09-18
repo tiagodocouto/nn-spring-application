@@ -22,15 +22,20 @@ package nl.nn.app.player.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+import nl.nn.app.player.stream.PlayerStreamProducer;
 import nl.nn.app.player.view.PlayerVO;
 import nl.nn.utils.controller.ControllerTest;
 import nl.nn.utils.helper.PlayerBuilderHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 
 @WebMvcTest(controllers = {PlayerController.class})
 class PlayerControllerTest extends ControllerTest<PlayerVO> {
+    @MockBean
+    private PlayerStreamProducer playerStreamProducer;
+
     private final static String BASE_URL = "/api/player";
 
     /**

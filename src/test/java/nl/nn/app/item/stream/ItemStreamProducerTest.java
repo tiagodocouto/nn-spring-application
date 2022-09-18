@@ -17,19 +17,18 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.nn.app.purchase.controller;
+package nl.nn.app.item.stream;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static nl.nn.app.purchase.stream.PurchaseStreamProducer.TOPIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import nl.nn.app.purchase.stream.PurchaseStreamProducer;
-import nl.nn.app.purchase.view.PurchaseVO;
+import nl.nn.app.item.view.ItemVO;
 import nl.nn.utils.config.TestBeanConfiguration;
-import nl.nn.utils.helper.PurchaseBuilderHelper;
-import nl.nn.utils.stream.PurchaseStreamConsumer;
+import nl.nn.utils.helper.ItemBuilderHelper;
+import nl.nn.utils.stream.ItemStreamConsumer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
@@ -39,30 +38,33 @@ import org.springframework.test.context.ContextConfiguration;
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
 @ContextConfiguration(classes = {TestBeanConfiguration.class})
-class PurchaseStreamTest {
-    @Autowired
-    private PurchaseStreamProducer purchaseStreamProducer;
+class ItemStreamProducerTest {
+    @Value("${spring.kafka.properties.topic.item}")
+    private String topic;
 
     @Autowired
-    private PurchaseStreamConsumer purchaseStreamConsumer;
+    private ItemStreamProducer itemStreamProducer;
+
+    @Autowired
+    private ItemStreamConsumer itemStreamConsumer;
 
     /**
-     * Test creating a new {@link PurchaseVO}
-     * and sending it through {@link PurchaseStreamProducer} Kafka Stream
+     * Test creating a new {@link ItemVO}
+     * and sending it through {@link ItemStreamProducer} Kafka Stream
      * expect to be produced and consumed. 
      */
     @Test
     void testGivenAnItemWhenPostingToControllerExpectToBeAccepted() throws Exception {
-        final var purchase = PurchaseBuilderHelper.builder().build();
-        final var result = purchaseStreamProducer.send(purchase).get().getProducerRecord();
-        assertThat(result.topic()).isEqualTo(TOPIC);
-        assertThat(result.key()).isEqualTo(purchase.getId());
-        assertThat(result.value()).isEqualTo(purchase);
+        final var item = ItemBuilderHelper.builder().build();
+        final var result = itemStreamProducer.send(item).get().getProducerRecord();
+        assertThat(result.topic()).isEqualTo(topic);
+        assertThat(result.key()).isEqualTo(item.getId());
+        assertThat(result.value()).isEqualTo(item);
 
-        final var consumed = purchaseStreamConsumer.latch().await(10, SECONDS);
+        final var consumed = itemStreamConsumer.latch().await(10, SECONDS);
         assertThat(consumed).isTrue();
-        final var record = purchaseStreamConsumer.record();
-        assertThat(record.key()).isEqualTo(purchase.getId());
-        assertThat(record.value()).isEqualTo(purchase);
+        final var record = itemStreamConsumer.record();
+        assertThat(record.key()).isEqualTo(item.getId());
+        assertThat(record.value()).isEqualTo(item);
     }
 }
